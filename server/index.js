@@ -9,6 +9,9 @@ import morgan from "morgan";
 import path from "path";
 import { fileURLToPath } from "url";
 
+import authRoutes from "./routes/auth.js";
+import { register } from "./controllers/auth.js";
+
 // midleware configurations
 const __filename = fileURLToPath(import.meta.url); // for grabbing file URL
 const __dirname = path.dirname(__filename); // getting the directory name
@@ -35,6 +38,12 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage });
+
+// setting up routes with files
+app.post("/auth/register", upload.single("picture"), register);
+
+// setting up routes
+app.use("/auth", authRoutes);
 
 // setting up mongoose
 const PORT = process.env.PORT || 6001;
