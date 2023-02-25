@@ -12,6 +12,8 @@ import { fileURLToPath } from "url";
 import authRoutes from "./routes/auth.js";
 import { register } from "./controllers/auth.js";
 
+import userRoutes from "./routes/users.js";
+
 // midleware configurations
 const __filename = fileURLToPath(import.meta.url); // for grabbing file URL
 const __dirname = path.dirname(__filename); // getting the directory name
@@ -44,6 +46,7 @@ app.post("/auth/register", upload.single("picture"), register);
 
 // setting up routes
 app.use("/auth", authRoutes);
+app.use("/users", userRoutes);
 
 // setting up mongoose
 const PORT = process.env.PORT || 6001;
