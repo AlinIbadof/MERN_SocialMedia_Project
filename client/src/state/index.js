@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  mode: "light", // represents dark/light theme
+  mode: "light",
   user: null,
   token: null,
   posts: [],
@@ -11,12 +11,10 @@ export const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    // reducers are functions that modify the global state
     setMode: (state) => {
-      state.mode = state.mode === "light" ? "dark" : "light"; // changes the color themes
+      state.mode = state.mode === "light" ? "dark" : "light";
     },
     setLogin: (state, action) => {
-      // action is basically params
       state.user = action.payload.user;
       state.token = action.payload.token;
     },
@@ -28,7 +26,7 @@ export const authSlice = createSlice({
       if (state.user) {
         state.user.friends = action.payload.friends;
       } else {
-        console.error("user friends non-existent");
+        console.error("user friends non-existent :(");
       }
     },
     setPosts: (state, action) => {
@@ -36,7 +34,7 @@ export const authSlice = createSlice({
     },
     setPost: (state, action) => {
       const updatedPosts = state.posts.map((post) => {
-        if (post._id === action.payload.post_id) return action.payload.post;
+        if (post._id === action.payload.post._id) return action.payload.post;
         return post;
       });
       state.posts = updatedPosts;
